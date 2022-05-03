@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+</body>
+<script>
+
+    let data = new FormData(); // 2
+    data.append("title", 'e')
+    data.append("deadline", 'e')
+    data.append("email", 'dinhtai2000@gmail.com')
+    data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+
+    axios.post('http://127.0.0.1:9999/sendmail/', data) // 4
+        // .then(res => alert("Form Submitted")) // 5
+        .catch(errors => console.log(errors)) // 6
+</script>
+</html>
