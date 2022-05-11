@@ -3,6 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('remind/', views.index),
+    path('api/v1/remind', views.remindFunction),
     path('', views.home),
 ]

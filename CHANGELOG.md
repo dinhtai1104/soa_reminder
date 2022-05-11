@@ -1,4 +1,4 @@
-﻿CHANGE LOG
+CHANGE LOG
 
 [27/04/2022]: Tạo project, phân luồng thành 3 service
 
@@ -27,4 +27,7 @@
 `	`- Test luồng: oke
 
 `	`- Test chịu tải: oke - 10message
+
+[11/05/2022]: Thêm 2 thông báo trước deadline (Config được - default test:5mins)
+
 

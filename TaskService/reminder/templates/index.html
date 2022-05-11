@@ -1,34 +1,115 @@
-<div class="container">
-    <h1> Notes </h1>
-    <form method="POST" id="form">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="title">
-                Title
-            </label>
-            <input type="text" class="form-control" id="title">
-        </div>
-        <div class="form-group">
-            <label for="message">
-                Message
-            </label>
-            <input type="text" class="form-control" id="message">
-        </div>
-        <div class="form-group">
-            <label for="email">
-                Email
-            </label>
-            <input type="text" class="form-control" id="email">
-        </div>
-        <div class="form-group">
-            <label for="deadline">Note</label>
-            <input class="form-control" type='date' id="deadline" rows="3"></date>
-        </div>
-        <button type="submit">Submit </button>
-    </form>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style>
+*{
+    box-sizing: border-box;
+}
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+.form-group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+input[type=text] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type=datetime-local] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type=email] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1> Remind Service </h1>
+        <form method="POST" id="form">
+            <div class="form-group">
+                <label for="title">
+                    Tên công việc
+                </label>
+                <input type="text" class="form-control" id="task">
+            </div>
+
+            <div class="form-group">
+                <label for="title">
+                    Tên người nhận
+                </label>
+                <input type="text" class="form-control" id="user">
+            </div>
+            <div class="form-group">
+                <label for="title">
+                    Tiêu đề tin nhắn
+                </label>
+                <input type="text" class="form-control" id="subject">
+            </div>
+
+            <div class="form-group">
+                <label for="message">
+                    Tin nhắn
+                </label>
+                <input type="text" class="form-control" id="message">
+            </div>
+            <div class="form-group">
+                <label for="email">
+                    Email
+                </label>
+                <input type="email" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input class="form-control" type='datetime-local' id="deadline" rows="3">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send"> 
+            </div>
+        </form>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script>
     let form = document.getElementById('form'); // selecting the form
 
@@ -37,16 +118,38 @@
 
         let data = new FormData(); // 2
 
-        data.append("title", document.getElementById('title').value)
-        data.append("deadline", document.getElementById('deadline').value)
-        data.append("email", document.getElementById('email').value)
-        data.append("message", document.getElementById('message').value)
-        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+        task = document.getElementById('task').value
+        userCreate = document.getElementById('user').value
+        subject = document.getElementById('subject').value
+        message = document.getElementById('message').value
+        email = document.getElementById('email').value
+        deadline = document.getElementById('deadline').value
 
-        axios.post('http://127.0.0.1:8000/remind/', data) // 4
-            .then(res => alert("Form Submitted")) // 5
-            .catch(errors => console.log(errors)) // 6
+        data.append("task", task)
+        data.append("deadline", deadline)
+        data.append("email", email)
+        data.append("message", message)
+        data.append("subject", subject)
+        data.append("user", userCreate)
+        console.log(document.getElementById('deadline').value)
+
+
+        if (task == "" || deadline == "" || email=="" || userCreate=="") {
+            alert("Công việc gửi đi không hợp lệ!")
+            // return
+        }
+        
+
+        axios.post('http://127.0.0.1:8000/api/v1/remind/', data) // 4
+            .then(res => alert("Task Submitted")) // 5
+            .catch(errors => {
+                console.log(errors)
+                alert("Error!")
+            }) // 6
 
     })
 
 </script>
+</body>
+
+</html>
