@@ -42,15 +42,19 @@ class myThread (threading.Thread):
     def run(self):
         self.deadline = datetime.strptime(self.date, '%Y-%m-%dT%H:%M')
         print(self.deadline)
-        print(datetime.now())
+        # print(datetime.now())
         isAlert5min = False
         alert = "5mins"
+        value1 = datetime.now() + timedelta(hours=7) 
+
+        # date_time = value.strftime("%Y-%m-%d")
+        print(value1)
 
         while True:
             value = datetime.now() + timedelta(hours=7) 
 
             # date_time = value.strftime("%Y-%m-%d")
-
+            # print(value)
             minutes_diff = (self.deadline - value).total_seconds() / 60.0
             isAlert = False
             # print(minutes_diff)

@@ -135,12 +135,12 @@ input[type=submit]:hover {
 
 
         if (task == "" || deadline == "" || email=="" || userCreate=="") {
-            alert("Công việc gửi đi không hợp lệ!")
+            // alert("Công việc gửi đi không hợp lệ!")
             // return
         }
         
 
-        axios.post('http://127.0.0.1:8000/api/v1/remind/', data) // 4
+        axios.post('http://127.0.0.1:8000/api/v1/remind', data) // 4
             .then(res => alert("Task Submitted")) // 5
             .catch(errors => {
                 console.log(errors)
